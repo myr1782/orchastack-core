@@ -1,0 +1,23 @@
+orchastack-core
+
+orchastack-core endeavors to make OSGI as a full featured container for distributed application, including JTA, JPA, security supports 
+and MQ client for Kafka and rabbitMQ. It's build on iPOJO, which is a service framework for OSGI.
+
+Java developers just write pojo with annotaions like:
+
+@Component 
+@Provides(specifications = { orchastack.core.itest.biz.UserJpaService.class }) 
+@Instantiate public class CopyOfUserJpaServiceImpl implements UserJpaService {
+
+@PersistenceContext(unitName = "orcha-entity")
+private EntityManager persist;
+
+@RequiresRoles(value = "admins")
+@Transactional(timeout = 4000, propagation = "requires")
+public CloudUser1 saveWithTx(CloudUser1 user) throws Exception {
+
+......
+}
+..........
+}
+then orchastack help you to inject the whole dependencies.

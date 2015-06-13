@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd ">
+	<persistence-unit name="orcha-entity"
+		transaction-type="JTA">
+		<description>soi entities</description>
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<!-- ( &amp; (aries.xa.aware=true)) -->
+		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/orchaDS)</jta-data-source>
+		<!-- <jta-data-source>blueprint:comp/jtaDS</jta-data-source> -->
+
+		<class>orchastack.core.itest.entity.CloudUser1</class>
+
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<shared-cache-mode>ALL</shared-cache-mode>
+		<validation-mode>AUTO</validation-mode>
+
+		<properties>
+			<property name="openjpa.ConnectionFactoryMode" value="managed" />
+			<property name="openjpa.jdbc.DBDictionary"
+				value="mysql(TableType=innodb,SupportsSubselect=true)" />
+			<!-- <property name="openjpa.jdbc.DBDictionary" value="oracle(schemaCase=upper,storeCharsAsNumbers=false,MaxEmbeddedBlobSize=-1,MaxEmbeddedClobSize=-1,batchLimit=0)" 
+				/> -->
+			<property name="openjpa.jdbc.TransactionIsolation" value="read-committed" />
+			<!-- <property name="openjpa.AutoDetach" value="close,commit,rollback" 
+				/> -->
+			<property name="openjpa.BrokerFactory" value="jdbc" />
+			<property name="openjpa.TransactionMode" value="managed" />
+			<property name="openjpa.ManagedRuntime"
+				value="jndi(TransactionManagerName=osgi:service/javax.transaction.TransactionManager)" />
+			<property name="openjpa.RemoteCommitProvider" value="sjvm" />
+			<property name="openjpa.InitializeEagerly" value="true" />
+
+			<property name="openjpa.DynamicEnhancementAgent" value="false" />
+			<property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
+			<property name="openjpa.jdbc.Schema" value="orchadb" />
+			<!-- for oracle if the foreign key constraint already exists, alter table 
+				to add constraint will fail -->
+			<!-- <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" 
+				/> -->
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
+			<!-- <property name="openjpa.jdbc.QuerySQLCache" value="true(EnableStatistics=true)" 
+				/> -->
+			<property name="openjpa.DataCache"
+				value="true(EvictionSchedule='+15',CacheSize=1000,SoftReferenceSize=0)" />
+			<property name="openjpa.QueryCache"
+				value="true(CacheSize=1000, SoftReferenceSize=100, EvictPolicy='timestamp')" />
+			<property name="openjpa.jdbc.QuerySQLCache" value="true" />
+			<property name="openjpa.FlushBeforeQueries" value="true" />
+			<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)" />
+
+			<!-- mysql simulated cursor only support one cursor at a time. Setting 
+				this param on mysql may arouse Exception. <property name="openjpa.FetchBatchSize" 
+				value="50" /> -->
+			<!-- <property name="openjpa.Optimistic" value="false" /> -->
+			<!-- <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=cascade,JoinForeignKeyDeleteAction=cascade,IndexLogicalForeignKeys=true,AddNullIndicator=false" 
+				/> -->
+			<property name="openjpa.LockManager"
+				value="mixed(VersionCheckOnReadLock=true,VersionUpdateOnWriteLock=true)" />
+			<!-- <property name="openjpa.LockManager" value="pessimistic" /> -->
+			<property name="openjpa.LockTimeout" value="60000" />
+			<property name="openjpa.ReadLockLevel" value="read" />
+			<property name="openjpa.WriteLockLevel" value="write" />
+			<!-- <property name="openjpa.Compatibility" value="checkDatabaseForCascadePersistToDetachedEntity=false,AbstractMappingUniDirectional=false" 
+				/> -->
+			<!-- SingletonLifecycleEventManager=true is not valid in 2.2.0 ,CopyOnDetach=true -->
+			<property name="openjpa.Compatibility"
+				value="CheckDatabaseForCascadePersistToDetachedEntity=true,CascadeWithDetach=true,PrivatePersistentProperties=true,FlushBeforeDetach=true,CopyOnDetach=false" />
+			<property name="openjpa.BrokerImpl"
+				value="allowReferenceToSiblingContext=true,EvictFromDataCache=true" />
+
+			<property name="openjpa.DetachState"
+				value="fetch-groups(DetachedStateField=true,DetachedStateManager=true)" />
+			<!-- <property name="openjpa.DetachState" value="loaded(LiteAutoDetach=true)" 
+				/> -->
+			<!-- <property name="openjpa.DataCacheMode" value="DataCacheMode.ALL" 
+				/> -->
+			<property name="openjpa.DataCacheTimeout" value="120000" />
+			<property name="openjpa.jdbc.EagerFetchMode" value="join" />
+			<property name="openjpa.Multithreaded" value="true" />
+			<property name="openjpa.MaxFetchDepth" value="5" />
+			<property name="openjpa.IgnoreChanges" value="true" />
+			<property name="openjpa.ConnectionRetainMode" value="transaction" />
+			<property name="openjpa.RetainState" value="true" />
+			<property name="openjpa.MetaDataRepository" value="Preload=true" />
+
+			<!-- <property name="openjpa.FetchBatchSize" value="50" /> -->
+			<!-- <property name="openjpa.jdbc.DBDictionary" value="oracle(batchLimit=25)"/> -->
+			<!-- <property name="openjpa.ConnectionRetainMode" value="always"/> -->
+			<property name="openjpa.jdbc.ResultSetType" value="scroll-insensitive" />
+			<!-- <property name="openjpa.jdbc.FetchDirection" value="forward" /> <property 
+				name="openjpa.jdbc.LRSSize" value="query" /> <property name="openjpa.ProxyManager" 
+				value="TrackChanges=false" /> -->
+			<property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=True" />
+			<property name="openjpa.Log"
+				value="DefaultLevel=WARN, Runtime=INFO, 
+				Tool=INFO, SQL=TRACE" />
+			<!-- <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, 
+				Tool=INFO, SQL=INFO" /> -->
+		</properties>
+	</persistence-unit>
+</persistence>

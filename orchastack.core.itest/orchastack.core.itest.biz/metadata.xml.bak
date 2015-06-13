@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipojo xmlns:tr="org.apache.felix.ipojo.transaction" xmlns:jpa="orchastack.ipojo.jpa">
+	<component classname="orchastack.core.itest.impl.UserDaoServiceImpl"
+		name="userDao">
+		<provides />
+		<jpa:persistencecontext field="persist"/>
+		<tr:transaction field="transaction">
+			<transactional method="saveWithTx" />
+		</tr:transaction>
+	</component>
+
+</ipojo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipojo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/ipojo/schemas/CURRENT/core.xsd"
+	xmlns="org.apache.felix.ipojo">
+
+	<component classname="orchastack.cloud.ds.OrchaStackDataSource"
+		name="dataSourceComponent">
+		
+		<callback transition="validate" method="init" />
+		<callback transition="invalidate" method="close" />
+		
+		<properties pid="orchastack.core.ds.params" propagation="true"
+			updated="update" />
+			
+		<provides specifications="javax.sql.DataSource">
+			<property field="m_jndiName" name="osgi.jndi.service.name"
+				value="jdbc/orchaDS" />
+		</provides>
+	</component>
+	
+	<instance component="dataSourceComponent" name="defaultDataSource" />
+</ipojo>

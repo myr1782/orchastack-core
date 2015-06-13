@@ -1,0 +1,214 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>orchastack.core</groupId>
+		<artifactId>orchastack.core.itest</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>orchastack.core.itest.test</artifactId>
+
+	<properties>
+		<asm.version>4.0</asm.version>
+		<junit-version>4.9</junit-version>
+		<osgi.version>4.3.0</osgi.version>
+		<osgi.compendium.version>4.2.0</osgi.compendium.version>
+		<!-- <pax.exam.version>3.6.0-SNAPSHOT</pax.exam.version> -->
+		<pax.exam.version>3.5.0</pax.exam.version>
+		<pax.logging.version>1.6.10</pax.logging.version>
+		<pax.runner.version>1.7.6</pax.runner.version>
+		<pax.base.version>1.3.0</pax.base.version>
+		<pax.url.version>1.5.0</pax.url.version>
+		<pax.web.version>2.1.0</pax.web.version>
+		<pax.swissbox.version>1.5.1</pax.swissbox.version>
+		<pax.tinybundle.version>1.0.0</pax.tinybundle.version>
+		<karaf.version>3.0.0</karaf.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>orchastack.core.mq</groupId>
+			<artifactId>orchastack.core.mq.core</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>orchastack.core.itest</groupId>
+			<artifactId>orchastack.core.itest.entity</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>orchastack.core.itest</groupId>
+			<artifactId>orchastack.core.itest.biz</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- ipojo -->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.ipojo.api</artifactId>
+			<version>1.12.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.ipojo</artifactId>
+			<version>1.12.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.ipojo.annotations</artifactId>
+			<version>1.12.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam</artifactId>
+			<version>${pax.exam.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-junit4</artifactId>
+			<version>${pax.exam.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-container-karaf</artifactId>
+			<version>${pax.exam.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ops4j.pax.url</groupId>
+			<artifactId>pax-url-aether</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.apache.karaf.tooling.exam</groupId> <artifactId>org.apache.karaf.tooling.exam.container</artifactId> 
+			<version>3.0.0</version> <scope>test</scope> </dependency> Pax Exam version 
+			you would like to use. At least 2.2.x is required. <dependency> <groupId>org.ops4j.pax.exam</groupId> 
+			<artifactId>pax-exam-junit4</artifactId> <version>3.3.0</version> <scope>test</scope> 
+			</dependency> <dependency> <groupId>org.apache.karaf</groupId> <artifactId>apache-karaf</artifactId> 
+			<version>3.0.0</version> <type>zip</type> <scope>test</scope> </dependency> -->
+		<!-- For sane logging -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.6</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.6</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.6.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-atinject_1.0_spec</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- for email -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-activation_1.1_spec</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.specs</groupId>
+			<artifactId>org.apache.servicemix.specs.activation-api-1.1</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.activation</artifactId>
+			<version>3.0-b59</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jta_1.1_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.geronimo.specs</groupId> <artifactId>geronimo-javamail_1.4_spec</artifactId> 
+			<version>1.7.1</version> </dependency> -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>smtp</artifactId>
+			<version>1.4.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.4.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- end of email dependency -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.servicemix.tooling</groupId>
+				<artifactId>depends-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>generate-depends-file</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>generate-depends-file</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<runOrder>alphabetical</runOrder>
+					<forkMode>always</forkMode>
+					<parallel>none</parallel>
+					<threadCount>1</threadCount>
+					<classpathDependencyScopeExclude>provided</classpathDependencyScopeExclude>
+					<systemProperties>
+						<pax.exam.framework>${pax.exam.framework}</pax.exam.framework>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<groupId>orchastack.core.itest</groupId>
+</project>

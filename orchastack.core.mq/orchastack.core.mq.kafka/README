@@ -1,0 +1,2 @@
+service:jmx:rmi:///jndi/rmi://10.107.122.53:9999/jmxrmi
+service:jmx:rmi://10.107.122.53:9999/jndi/rmi://10.107.122.53:1098/jmxrmi

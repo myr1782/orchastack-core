@@ -1,0 +1,11 @@
+1.config zookeeper to use SSL:
+Communication using the Netty framework
+New in 3.4: Netty is an NIO based client/server communication framework, it simplifies (over NIO being used directly) many of the complexities of network level communication for java applications. Additionally the Netty framework has built in support for encryption (SSL) and authentication (certificates). These are optional features and can be turned on or off individually.
+
+Prior to version 3.4 ZooKeeper has always used NIO directly, however in versions 3.4 and later Netty is supported as an option to NIO (replaces). NIO continues to be the default, however Netty based communication can be used in place of NIO by setting the environment variable "zookeeper.serverCnxnFactory" to "org.apache.zookeeper.server.NettyServerCnxnFactory". You have the option of setting this on either the client(s) or server(s), typically you would want to set this on both, however that is at your discretion.
+
+TBD - tuning options for netty - currently there are none that are netty specific but we should add some. Esp around max bound on the number of reader worker threads netty creates.
+
+TBD - how to manage encryption
+
+TBD - how to manage certificates
